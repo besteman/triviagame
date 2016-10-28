@@ -1,18 +1,48 @@
 
 $(document).ready(function(){
 
+var question1 = {
+
+	question: "What is 4 divided by 4?",
+	answer: "1",
+	possible: [1,2,3,4],
+	boolean: [true,false,false,false]
+
+};
+
+var question2 = {
+
+	question: "What is My Name?",
+	answer: "4",
+	possible: ["Joe","John","Jimmy","Justin"],
+	boolean: [false,false,false,true]
+
+};
+
+var question3 = {
+
+	question: "Who is the most beautiful woman in the world?",
+	answer: "3",
+	possible: ["Juila","Julie","Courtney","Jill"],
+	boolean: [false,false,true,false]
+
+};
+
+
 
 var stopwatch = {
 
     time: 3,
-    hour_glass: "00:30",
+    hour_glass: "00:03",
 
     
     reset: function () {
         stopwatch.time = 3;
         
+        console.log("Reset Time " , this.time);
+        //counter = 0;
         //change the "display" div to "00:00"
-          $(".counter").html(hour_glass);
+          $(".counter").html(this.hour_glass);
         //empty the "laps" div
 
     },
@@ -20,6 +50,7 @@ var stopwatch = {
         //Use setInterval to start the count here
        counter = setInterval(stopwatch.count,1000);
        console.log("start :" , stopwatch.time);
+       console.log("Counter: " , counter)
 
     },
     stop: function(){
@@ -35,7 +66,7 @@ var stopwatch = {
         var hi = stopwatch.timeConverter(stopwatch.time);
         //Use the variable you just created to show the converted time in the "display" div
         $(".counter").html(hi);
-  		console.log("Count :" , stopwatch.time);
+  		//console.log("Count :" , stopwatch.time);
 
   		if (stopwatch.time == 0) {
   			times_up();
@@ -61,56 +92,72 @@ var stopwatch = {
 };
 
 
+$(".counter").html(stopwatch.hour_glass);
 
 
-var question1 = {
+function question_pick (){
 
-	question: "What is 4 divided by 4?",
-	answer: "1",
-	possible: [1,2,3,4],
-	boolean: [true,false,false,false]
+	var turns = number_of_questions;
 
-};
+	console.log();
 
-var question2 = {
+	if (turns != 0 ) {
 
-	question: "What is 4 times 1?",
-	answer: "4",
-	possible: [1,2,3,4],
-	boolean: [false,false,false,true]
+		var rand = Math.floor(Math.random() * possible_questions.length);
 
-};
+		var rand_pick = possible_questions[rand];
 
-var question3 = {
+		//console.log("Before Splice " , possible_questions);
 
-	question: "What is 4 minus 1?",
-	answer: "3",
-	possible: [1,2,3,4],
-	boolean: [false,false,true,false]
+		possible_questions.splice(rand , 1);
 
-};
+		//console.log("After Splice " , possible_questions);
 
-var possible_questions = [question1,question2,question3];
+		console.log("Rand is " , rand);
+		console.log("rand_pick is " , rand_pick);
 
-function generate () {
+		generate(rand_pick);
 
-	$(".question").html(question1.question);
+		number_of_questions--;
 
-	for (var i = 0; i < question1.possible.length; i++) {
+		return rand_pick;
+
+
+
+	} else {
+
+		game_over_man_game_over();
+
+	}
+
+}
+
+
+function generate (rand_pick) {
+
+
+	$(".question").html(rand_pick.question);
+
+	for (var i = 0; i < rand_pick.possible.length; i++) {
 		
 		var guess_answer = $('<button>');
-		guess_answer.addClass("options btn-group-lg");
+		guess_answer.addClass("options btn-group-lg btn btn-primary");
 		guess_answer.attr({
-			"data-boolean" : question1.boolean[i]
+			"data-boolean" : rand_pick.boolean[i]
 		});
 
-		guess_answer.text(question1.possible[i]);
+		guess_answer.text(rand_pick.possible[i]);
 		//guess_answer.append(question1.possible[i]);
 
 		$(".guess").append("<p>" + guess_answer.prop("outerHTML") + "</p>");
 
+
 	}
+
+    stopwatch.start();
+	
 }
+
 
 
 function check_answer () {
@@ -138,50 +185,57 @@ function check_answer () {
 
 }
 
-function times_up (){
+function game_over_man_game_over(){
 
-	$(".guess").html("<p>You are out of time</p>" + question1.answer);	
-	stopwatch.reset();
+	$(".guess").html("Round One Fight!!");
+
 
 }
+
+function rinse_and_repeat(){
+
+	$(".guess").html("");
+	stopwatch.reset();
+	stopwatch.stop();
+	question_pick();
+
+
+}
+
+function times_up (){
+
+	$(".guess").html("<p>You are out of time</p>" + the_pick_is.answer);
+	console.log(the_pick_is.answer);
+
+	//setTimeout($(".guess").html("") , 3000);
+
+	setTimeout(rinse_and_repeat , 6000);
+
+}
+
 
 function right_answer(){
 
 	$(".guess").html("You got it right");
+	stopwatch.reset();
+	question_pick();
 
 }
 
 function wrong_answer() {
 	
-	$(".guess").html("<p>You got it wrong son</p>" + question1.answer);	
-
+	$(".guess").html("<p>You got it wrong son</p>" + the_pick_is.answer);
+	stopwatch.reset();	
+	question_pick();
 }
 
-/* var counter = $(".counter");
+var possible_questions = [question1,question2,question3];
+var number_of_questions = possible_questions.length;
+console.log();
 
-function update() {
-    var myTime = $(".counter").html();
-    var ss = myTime.split(":");
-    var dt = new Date();
-    dt.setHours(0);
-    dt.setMinutes(ss[0]);
-    dt.setSeconds(ss[1]);
+var the_pick_is = question_pick();
 
-    var dt2 = new Date(dt.valueOf() - 1000);
-    var temp = dt2.toTimeString().split(" ");
-    var ts = temp[0].split(":");
-
-    $(".counter").html(ts[1]+":"+ts[2]);
-    setTimeout(update, 1000);
-}
-
-setTimeout(update, 1000);*/
-
-//$(".counter").click(counter.start);
-
-//stopwatch.start();
-generate();
-
+//question_pick();
 check_answer();
 
 
