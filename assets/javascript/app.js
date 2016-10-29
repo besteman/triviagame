@@ -1,4 +1,4 @@
-
+/*
 $(document).ready(function(){
 
 
@@ -251,4 +251,4 @@ generate(the_pick_is);
 
 
 
-});
+});*/

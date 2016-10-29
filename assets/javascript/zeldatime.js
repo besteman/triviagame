@@ -7,7 +7,8 @@ var question1 = {
 	question: "Who is the fairy that Link has?",
 	answer: "Navi",
 	possible: ["Navi","Favi","Loue","Tael"],
-	boolean: [true,false,false,false]
+	boolean: [true,false,false,false],
+	img: "assets/images/navi.png"
 
 };
 
@@ -16,7 +17,8 @@ var question2 = {
 	question: "Where do you get the Enchanted Defense?",
 	answer: "Great Fairy of Great Fairy of Courage",
 	possible: ["Great Fairy of Wisdom","Great Fairy of Magic","Great Fairy of Power","Great Fairy of Courage"],
-	boolean: [false,false,false,true]
+	boolean: [false,false,false,true],
+	img: "assets/images/ed.jpg"
 
 };
 
@@ -25,7 +27,8 @@ var question3 = {
 	question: "Who is the Boss of The Shadow Temple",
 	answer: "Bongo Bongo",
 	possible: ["Volvagia","Twinrova","Bongo Bongo","Barinade"],
-	boolean: [false,false,true,false]
+	boolean: [false,false,true,false],
+	img: "assets/images/bongo.png"
 
 };
 
@@ -33,12 +36,12 @@ var question3 = {
 
 var stopwatch = {
 
-    time: 3,
+    time: 5,
     hour_glass: "00:03",
 
     
     reset: function () {
-        stopwatch.time = 3;
+        stopwatch.time = 5;
         
         console.log("Reset Time " , this.time);
         //counter = 0;
@@ -159,7 +162,7 @@ function generate (rand_pick) {
 
 	}
 
-    //stopwatch.start();
+    stopwatch.start();
 	check_answer();
 }
 
@@ -207,9 +210,11 @@ function rinse_and_repeat(){
 
 }
 
+//$('#image-holder').html('<img src='+images[count]+ ' width="400px">');
+
 function times_up (){
 
-	$(".guess").html("<p>You are out of time</p>" + the_pick_is.answer);
+	$(".info_panel").html("<p>You are out of time</p>" + "<p>" + the_pick_is.answer + "</p>" + "<img src=" + the_pick_is.img + " width='100px'>");
 	console.log(the_pick_is.answer);
 
 	//setTimeout($(".guess").html("") , 3000);
@@ -242,9 +247,19 @@ var number_of_questions = possible_questions.length;
 
 console.log();
 
-var the_pick_is = question_pick();
 
-generate(the_pick_is);
+var the_pick_is;
+
+
+$(".start_btn").on("click" , function(){
+
+	the_pick_is = question_pick();
+
+	generate(the_pick_is);
+
+	
+});
+
 
 
 
