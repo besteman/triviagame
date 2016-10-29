@@ -1,6 +1,7 @@
 
 $(document).ready(function(){
 
+
 var question1 = {
 
 	question: "What is 4 divided by 4?",
@@ -13,7 +14,7 @@ var question1 = {
 var question2 = {
 
 	question: "What is My Name?",
-	answer: "4",
+	answer: "Justin",
 	possible: ["Joe","John","Jimmy","Justin"],
 	boolean: [false,false,false,true]
 
@@ -22,7 +23,7 @@ var question2 = {
 var question3 = {
 
 	question: "Who is the most beautiful woman in the world?",
-	answer: "3",
+	answer: "Courtney",
 	possible: ["Juila","Julie","Courtney","Jill"],
 	boolean: [false,false,true,false]
 
@@ -101,7 +102,7 @@ function question_pick (){
 
 	console.log();
 
-	if (turns != 0 ) {
+	if (turns > 0 ) {
 
 		var rand = Math.floor(Math.random() * possible_questions.length);
 
@@ -116,9 +117,13 @@ function question_pick (){
 		console.log("Rand is " , rand);
 		console.log("rand_pick is " , rand_pick);
 
-		generate(rand_pick);
+		
+
+		console.log("Both: " , number_of_questions);
 
 		number_of_questions--;
+
+		console.log("Ather " ,number_of_questions);
 
 		return rand_pick;
 
@@ -154,8 +159,8 @@ function generate (rand_pick) {
 
 	}
 
-    stopwatch.start();
-	
+    //stopwatch.start();
+	check_answer();
 }
 
 
@@ -196,8 +201,8 @@ function rinse_and_repeat(){
 
 	$(".guess").html("");
 	stopwatch.reset();
-	stopwatch.stop();
-	question_pick();
+	the_pick_is = question_pick();
+	generate(the_pick_is);
 
 
 }
@@ -208,7 +213,7 @@ function times_up (){
 	console.log(the_pick_is.answer);
 
 	//setTimeout($(".guess").html("") , 3000);
-
+	stopwatch.stop();
 	setTimeout(rinse_and_repeat , 6000);
 
 }
@@ -217,26 +222,30 @@ function times_up (){
 function right_answer(){
 
 	$(".guess").html("You got it right");
-	stopwatch.reset();
-	question_pick();
+	stopwatch.stop();
+	setTimeout(rinse_and_repeat , 6000);
+
 
 }
 
 function wrong_answer() {
 	
 	$(".guess").html("<p>You got it wrong son</p>" + the_pick_is.answer);
-	stopwatch.reset();	
-	question_pick();
+	stopwatch.stop();	
+	setTimeout(rinse_and_repeat , 6000);
+
 }
 
 var possible_questions = [question1,question2,question3];
+
 var number_of_questions = possible_questions.length;
+
 console.log();
 
 var the_pick_is = question_pick();
 
-//question_pick();
-check_answer();
+generate(the_pick_is);
+
 
 
 
