@@ -240,13 +240,23 @@ function game_over_man_game_over(){
 
 function get_ready_for_action(){
 
-	possible_questions = [question4,question5,question6];
-	number_of_questions = possible_questions.length;
+	if (num_rounds == total_rounds){
 
-	$(".guess").html("");
-	stopwatch.reset();
-	the_pick_is = question_pick();
-	generate(the_pick_is);
+		possible_questions = [question4,question5,question6];
+		number_of_questions = possible_questions.length;
+
+		$(".guess").html("");
+		stopwatch.reset();
+		the_pick_is = question_pick();
+		generate(the_pick_is);
+
+	}
+
+	else{
+
+		$(".info_panel").html( "<h1>Final score" + "<h2> Right Anwsers: " +  wins +"</h2>" + "<h2>  Wrong Anwser is: " +  wrongs +"</h2>");
+
+	}
 
 }
 
@@ -309,6 +319,7 @@ function wrong_answer() {
 }
 
 var num_rounds = 0;
+var total_rounds = 2;
 
 var testing = 1000;
 
@@ -329,9 +340,6 @@ $(".start_btn").on("click" , function(){
 	rounds();
 
 	the_pick_is = question_pick();
-
-	
-	
 
 	setTimeout(generate.bind(null , the_pick_is), 2000);
 

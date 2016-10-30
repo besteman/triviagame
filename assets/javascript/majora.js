@@ -9,7 +9,8 @@ var question1 = {
 	question: "How long do you have to save the Termina?",
 	answer: "3",
 	possible: ["5","2","3","This is no time limit"],
-	boolean: [false,false,true,false]
+	boolean: [false,false,true,false],
+	img: "assets/images/three.jpg"
 
 };
 
@@ -18,7 +19,8 @@ var question2 = {
 	question: "Why did Link leave Hyrule?",
 	answer: "Trying to find Navi",
 	possible: ["Banished","Tired of fame","Traveling to help someone","Trying to find Navi"],
-	boolean: [false,false,false,true]
+	boolean: [false,false,false,true],
+	img: "assets/images/navi.png"
 
 };
 
@@ -27,24 +29,25 @@ var question3 = {
 	question: "What was the problem that Snowhead Mountain had?",
 	answer: "Never ending winter",
 	possible: ["Never ending winter","Running out of food","Raids for the Burklands","Children were going missing"],
-	boolean: [true,false,false,false]
+	boolean: [true,false,false,false],
+	img: "assets/images/snow.jpg"
 
 };
 
 
 var stopwatch = {
 
-    time: 3,
-    hour_glass: "00:03",
+    time: 5,
+    hour_glass: "00:05",
 
     
     reset: function () {
-        stopwatch.time = 3;
+        stopwatch.time = 5;
         
         console.log("Reset Time " , this.time);
         //counter = 0;
         //change the "display" div to "00:00"
-          $(".counter").html(this.hour_glass);
+          $(".info_panel").html(this.hour_glass);
         //empty the "laps" div
 
     },
@@ -67,7 +70,7 @@ var stopwatch = {
         //Get the current time, pass that into the stopwatch.timeConverter function, and save the result in a variable
         var hi = stopwatch.timeConverter(stopwatch.time);
         //Use the variable you just created to show the converted time in the "display" div
-        $(".counter").html(hi);
+        $(".info_panel").html(hi);
   		//console.log("Count :" , stopwatch.time);
 
   		if (stopwatch.time == 0) {
@@ -92,9 +95,6 @@ var stopwatch = {
         return minutes + ":" + seconds;
     }
 };
-
-
-$(".counter").html(stopwatch.hour_glass);
 
 
 function question_pick (){
@@ -132,7 +132,9 @@ function question_pick (){
 
 	} else {
 
-		game_over_man_game_over();
+
+		rounds();
+		setTimeout(game_over_man_game_over , 2000 );
 
 	}
 
@@ -159,8 +161,9 @@ function generate (rand_pick) {
 
 
 	}
-
-    //stopwatch.start();
+	$(".question").html(rand_pick.question);
+	$(".info_panel").html("Try to guess before the timer is done");
+    stopwatch.start();
 	check_answer();
 }
 
@@ -193,8 +196,49 @@ function check_answer () {
 
 function game_over_man_game_over(){
 
-	$(".guess").html("Round One Fight!!");
+	//$(".guess").html("Round One Done");
 
+	stopwatch.stop();
+	$(".panel-title").html("Round Done");
+
+	$(".info_panel").html("<h2> Right Anwsers: " +  wins +"</h2>" + "<h2>  Wrong Anwser is: " +  wrongs +"</h2>");
+
+	setTimeout(get_ready_for_action, 2000);
+
+
+}
+
+function get_ready_for_action(){
+
+	if (num_rounds == total_rounds){
+
+		possible_questions = [question4,question5,question6];
+		number_of_questions = possible_questions.length;
+
+		$(".guess").html("");
+		stopwatch.reset();
+		the_pick_is = question_pick();
+		generate(the_pick_is);
+
+	}
+
+	else{
+
+		$(".info_panel").html( "<h1>Final score" + "<h2> Right Anwsers: " +  wins +"</h2>" + "<h2>  Wrong Anwser is: " +  wrongs +"</h2>");
+
+	}
+
+}
+
+
+
+function rounds(){
+
+	num_rounds++;
+
+	$(".info_panel").html("<h1> Round " + num_rounds + "</h1>");
+
+	
 
 }
 
@@ -208,44 +252,70 @@ function rinse_and_repeat(){
 
 }
 
+//$('#image-holder').html('<img src='+images[count]+ ' width="400px">');
+
 function times_up (){
 
-	$(".guess").html("<p>You are out of time</p>" + the_pick_is.answer);
+	$(".panel-title").html("Time Up! The answer was " + the_pick_is.answer);
+	$(".info_panel").html("<img src=" + the_pick_is.img + " width='175px'>");
 	console.log(the_pick_is.answer);
 
 	//setTimeout($(".guess").html("") , 3000);
 	stopwatch.stop();
-	setTimeout(rinse_and_repeat , 6000);
+	setTimeout(rinse_and_repeat , testing);
 
 }
 
 
 function right_answer(){
 
-	$(".guess").html("You got it right");
+	$(".panel-title").html("Good Job " + the_pick_is.answer);
+	$(".info_panel").html("<img src=" + the_pick_is.img + " width='175px'>");
 	stopwatch.stop();
-	setTimeout(rinse_and_repeat , 6000);
+	wins++;
+	setTimeout(rinse_and_repeat , testing);
 
 
 }
 
 function wrong_answer() {
 	
-	$(".guess").html("<p>You got it wrong son</p>" + the_pick_is.answer);
-	stopwatch.stop();	
-	setTimeout(rinse_and_repeat , 6000);
+	$(".panel-title").html("Wrong! The answer was " + the_pick_is.answer);
+	$(".info_panel").html("<img src=" + the_pick_is.img + " width='175px'>");
+	stopwatch.stop();
+	wrongs++;
+	setTimeout(rinse_and_repeat , testing);
 
 }
+
+var num_rounds = 0;
+var total_rounds = 2;
+
+var testing = 1000;
 
 var possible_questions = [question1,question2,question3];
 
 var number_of_questions = possible_questions.length;
 
-console.log();
+var wins = 0;
+var wrongs = 0;
 
-var the_pick_is = question_pick();
 
-generate(the_pick_is);
+var the_pick_is;
+
+
+$(".start_btn").on("click" , function(){
+
+
+	rounds();
+
+	the_pick_is = question_pick();
+
+	setTimeout(generate.bind(null , the_pick_is), 2000);
+
+	
+});
+
 
 
 
