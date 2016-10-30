@@ -32,6 +32,37 @@ var question3 = {
 
 };
 
+var question4 = {
+
+	question: "hey?",
+	answer: "Navi",
+	possible: ["Navi","Favi","Loue","Tael"],
+	boolean: [true,false,false,false],
+	img: "assets/images/navi.png"
+
+};
+
+var question5 = {
+
+	question: "by?",
+	answer: "Great Fairy of Great Fairy of Courage",
+	possible: ["Great Fairy of Wisdom","Great Fairy of Magic","Great Fairy of Power","Great Fairy of Courage"],
+	boolean: [false,false,false,true],
+	img: "assets/images/ed.jpg"
+
+};
+
+var question6 = {
+
+	question: "goodby",
+	answer: "Bongo Bongo",
+	possible: ["Volvagia","Twinrova","Bongo Bongo","Barinade"],
+	boolean: [false,false,true,false],
+	img: "assets/images/bongo.png"
+
+};
+
+
 
 
 var stopwatch = {
@@ -131,7 +162,9 @@ function question_pick (){
 
 	} else {
 
-		game_over_man_game_over();
+
+		rounds();
+		setTimeout(game_over_man_game_over , 2000 );
 
 	}
 
@@ -158,8 +191,8 @@ function generate (rand_pick) {
 
 
 	}
-
-	$(".panel-title").html("Try to guess before the timer is done");
+	$(".question").html(rand_pick.question);
+	$(".info_panel").html("Try to guess before the timer is done");
     stopwatch.start();
 	check_answer();
 }
@@ -200,6 +233,32 @@ function game_over_man_game_over(){
 
 	$(".info_panel").html("<h2> Right Anwsers: " +  wins +"</h2>" + "<h2>  Wrong Anwser is: " +  wrongs +"</h2>");
 
+	setTimeout(get_ready_for_action, 2000);
+
+
+}
+
+function get_ready_for_action(){
+
+	possible_questions = [question4,question5,question6];
+	number_of_questions = possible_questions.length;
+
+	$(".guess").html("");
+	stopwatch.reset();
+	the_pick_is = question_pick();
+	generate(the_pick_is);
+
+}
+
+
+
+function rounds(){
+
+	num_rounds++;
+
+	$(".info_panel").html("<h1> Round " + num_rounds + "</h1>");
+
+	
 
 }
 
@@ -223,7 +282,7 @@ function times_up (){
 
 	//setTimeout($(".guess").html("") , 3000);
 	stopwatch.stop();
-	setTimeout(rinse_and_repeat , 6000);
+	setTimeout(rinse_and_repeat , testing);
 
 }
 
@@ -234,7 +293,7 @@ function right_answer(){
 	$(".info_panel").html("<p>You got it right</p>"  + "<img src=" + the_pick_is.img + " width='100px'>");
 	stopwatch.stop();
 	wins++;
-	setTimeout(rinse_and_repeat , 6000);
+	setTimeout(rinse_and_repeat , testing);
 
 
 }
@@ -245,9 +304,13 @@ function wrong_answer() {
 	$(".info_panel").html("<p>You got it wrong son</p>" + "<img src=" + the_pick_is.img + " width='100px'>");
 	stopwatch.stop();
 	wrongs++;
-	setTimeout(rinse_and_repeat , 6000);
+	setTimeout(rinse_and_repeat , testing);
 
 }
+
+var num_rounds = 0;
+
+var testing = 1000;
 
 var possible_questions = [question1,question2,question3];
 
@@ -262,9 +325,15 @@ var the_pick_is;
 
 $(".start_btn").on("click" , function(){
 
+
+	rounds();
+
 	the_pick_is = question_pick();
 
-	generate(the_pick_is);
+	
+	
+
+	setTimeout(generate.bind(null , the_pick_is), 2000);
 
 	
 });
