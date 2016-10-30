@@ -195,6 +195,7 @@ function game_over_man_game_over(){
 
 	//$(".guess").html("Round One Done");
 
+	stopwatch.stop();
 	$(".panel-title").html("Round Done");
 
 	$(".info_panel").html("<h2> Right Anwsers: " +  wins +"</h2>" + "<h2>  Wrong Anwser is: " +  wrongs +"</h2>");

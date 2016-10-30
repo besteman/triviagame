@@ -1,0 +1,28 @@
+body {
+
+
+	background-image: url("../images/wallpapertime.png");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+		
+}
+
+.jumbotron{
+
+	background-color: lightgreen;
+
+}
+
+.guess{
+
+	background-image: ("../images/panel2.jpg");
+
+
+}
+
+.info_panel{
+
+	background-image: ("../images/panel1.jpg") no-repeat !important;
+
+}
