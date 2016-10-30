@@ -37,7 +37,7 @@ var question3 = {
 var stopwatch = {
 
     time: 5,
-    hour_glass: "00:03",
+    hour_glass: "00:05",
 
     
     reset: function () {
@@ -46,7 +46,7 @@ var stopwatch = {
         console.log("Reset Time " , this.time);
         //counter = 0;
         //change the "display" div to "00:00"
-          $(".counter").html(this.hour_glass);
+          $(".info_panel").html(this.hour_glass);
         //empty the "laps" div
 
     },
@@ -69,7 +69,7 @@ var stopwatch = {
         //Get the current time, pass that into the stopwatch.timeConverter function, and save the result in a variable
         var hi = stopwatch.timeConverter(stopwatch.time);
         //Use the variable you just created to show the converted time in the "display" div
-        $(".counter").html(hi);
+        $(".info_panel").html(hi);
   		//console.log("Count :" , stopwatch.time);
 
   		if (stopwatch.time == 0) {
@@ -94,9 +94,6 @@ var stopwatch = {
         return minutes + ":" + seconds;
     }
 };
-
-
-$(".counter").html(stopwatch.hour_glass);
 
 
 function question_pick (){
@@ -162,6 +159,7 @@ function generate (rand_pick) {
 
 	}
 
+	$(".panel-title").html("Try to guess before the timer is done");
     stopwatch.start();
 	check_answer();
 }
@@ -195,7 +193,11 @@ function check_answer () {
 
 function game_over_man_game_over(){
 
-	$(".guess").html("Round One Fight!!");
+	//$(".guess").html("Round One Done");
+
+	$(".panel-title").html("Round Done");
+
+	$(".info_panel").html("<h2> Right Anwsers: " +  wins +"</h2>" + "<h2>  Wrong Anwser is: " +  wrongs +"</h2>");
 
 
 }
@@ -214,7 +216,8 @@ function rinse_and_repeat(){
 
 function times_up (){
 
-	$(".info_panel").html("<p>You are out of time</p>" + "<p>" + the_pick_is.answer + "</p>" + "<img src=" + the_pick_is.img + " width='100px'>");
+	$(".panel-title").html(the_pick_is.answer);
+	$(".info_panel").html("<p>You are out of time</p>" + "<img src=" + the_pick_is.img + " width='100px'>");
 	console.log(the_pick_is.answer);
 
 	//setTimeout($(".guess").html("") , 3000);
@@ -226,8 +229,10 @@ function times_up (){
 
 function right_answer(){
 
-	$(".guess").html("You got it right");
+	$(".panel-title").html(the_pick_is.answer);
+	$(".info_panel").html("<p>You got it right</p>"  + "<img src=" + the_pick_is.img + " width='100px'>");
 	stopwatch.stop();
+	wins++;
 	setTimeout(rinse_and_repeat , 6000);
 
 
@@ -235,8 +240,10 @@ function right_answer(){
 
 function wrong_answer() {
 	
-	$(".guess").html("<p>You got it wrong son</p>" + the_pick_is.answer);
-	stopwatch.stop();	
+	$(".panel-title").html(the_pick_is.answer);
+	$(".info_panel").html("<p>You got it wrong son</p>" + "<img src=" + the_pick_is.img + " width='100px'>");
+	stopwatch.stop();
+	wrongs++;
 	setTimeout(rinse_and_repeat , 6000);
 
 }
@@ -245,7 +252,8 @@ var possible_questions = [question1,question2,question3];
 
 var number_of_questions = possible_questions.length;
 
-console.log();
+var wins = 0;
+var wrongs = 0;
 
 
 var the_pick_is;
