@@ -1,0 +1,14 @@
+body {
+
+
+	background-image: url("../images/wallpaper4.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100% 120%;
+		
+}
+
+
+.jumbotron{
+	background-color: lightgray;
+}
