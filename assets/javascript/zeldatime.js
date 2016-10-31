@@ -67,12 +67,12 @@ var question6 = {
 
 var stopwatch = {
 
-    time: 5,
-    hour_glass: "00:05",
+    time: 15,
+    hour_glass: "00:15",
 
     
     reset: function () {
-        stopwatch.time = 5;
+        stopwatch.time = 15;
         
         console.log("Reset Time " , this.time);
         //counter = 0;
