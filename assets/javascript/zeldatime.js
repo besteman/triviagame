@@ -287,7 +287,7 @@ function rinse_and_repeat(){
 function times_up (){
 
 	$(".panel-title").html(the_pick_is.answer);
-	$(".info_panel").html("<p>You are out of time</p>" + "<img src=" + the_pick_is.img + " width='100px'>");
+	$(".info_panel").html("<p>You are out of time</p>" + "<img src=" + the_pick_is.img + " width='250px'>");
 	console.log(the_pick_is.answer);
 
 	//setTimeout($(".guess").html("") , 3000);
@@ -300,7 +300,7 @@ function times_up (){
 function right_answer(){
 
 	$(".panel-title").html(the_pick_is.answer);
-	$(".info_panel").html("<p>You got it right</p>"  + "<img src=" + the_pick_is.img + " width='100px'>");
+	$(".info_panel").html("<p>You got it right</p>"  + "<img src=" + the_pick_is.img + " width='250px'>");
 	stopwatch.stop();
 	wins++;
 	setTimeout(rinse_and_repeat , testing);
@@ -311,7 +311,7 @@ function right_answer(){
 function wrong_answer() {
 	
 	$(".panel-title").html(the_pick_is.answer);
-	$(".info_panel").html("<p>You got it wrong son</p>" + "<img src=" + the_pick_is.img + " width='100px'>");
+	$(".info_panel").html("<p>You got it wrong son</p>" + "<img src=" + the_pick_is.img + " width='250px'>");
 	stopwatch.stop();
 	wrongs++;
 	setTimeout(rinse_and_repeat , testing);

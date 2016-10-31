@@ -34,6 +34,36 @@ var question3 = {
 
 };
 
+var question4 = {
+
+	question: "What song is in the game is also in Ocarina of Time",
+	answer: "Song of Time",
+	possible: ["Song of Stroms","Song of Time","Sun's Song","Oath to Order"],
+	boolean: [false,true,false,false],
+	img: "assets/images/time.jpg"
+
+};
+
+var question5 = {
+
+	question: "What type of creature stole Majora's Mask",
+	answer: "Skull Kid",
+	possible: ["Skull Kid","Goron","Forest Kid","Zora"],
+	boolean: [true,false,false,false],
+	img: "assets/images/skull.png"
+
+};
+
+var question6 = {
+
+	question: "What musical instrument did the Zora Link use?",
+	answer: "Guitar",
+	possible: ["Vocals","Bass Guitar","Guitar","Drums"],
+	boolean: [false,false,true,false],
+	img: "assets/images/guitar.jpg"
+
+};
+
 
 var stopwatch = {
 
