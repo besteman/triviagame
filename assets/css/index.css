@@ -1,0 +1,27 @@
+.time{
+	
+
+	background-image: url("../images/mainlink.jpg");
+	background-size: 420px 570px;
+	width: 420px;
+	height: 545px;
+
+
+}	
+
+.mask{
+
+	background-image: url("../images/indexmask.jpg");
+	background-size: 420px 570px;
+	width: 420px;
+	height: 545px;
+
+}
+
+.re{
+
+	background-image: url("../images/mainre.jpg");
+	background-size: 420px 570px;
+	width: 420px;
+	height: 545px;
+}
