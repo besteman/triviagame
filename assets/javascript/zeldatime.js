@@ -321,7 +321,7 @@ function wrong_answer() {
 var num_rounds = 0;
 var total_rounds = 2;
 
-var testing = 1000;
+var testing = 6000;
 
 var possible_questions = [question1,question2,question3];
 
