@@ -60,17 +60,3 @@ var question6 = {
 
 };
 
-/*var question1 = {
-
-	question: "Sound",
-	answer: "Navi",
-	possible: ["Navi","Favi","Loue","Tael"],
-	boolean: [true,false,false,false],
-	mp3: "assets/audio/stroms.mp3"
-
-};
-*/
-
-var audio =  new Audio(question1.mp3);
-
-aud

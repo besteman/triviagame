@@ -128,7 +128,7 @@ function generate (rand_pick) {
 	}
 	$(".question").html(rand_pick.question);
 	$(".info_panel").html("Try to guess before the timer is done");
-    //stopwatch.start();
+    stopwatch.start();
 	check_answer();
 }
 
