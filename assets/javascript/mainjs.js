@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+
+
+
 var stopwatch = {
 
     time: 15,
@@ -105,7 +108,6 @@ function question_pick (){
 
 }
 
-
 function generate (rand_pick) {
 
 
@@ -127,7 +129,7 @@ function generate (rand_pick) {
 
 	}
 	$(".question").html(rand_pick.question);
-	$(".info_panel").html("Try to guess before the timer is done");
+	$(".info_title").html("Try to guess before the timer is done");
     stopwatch.start();
 	check_answer();
 }
@@ -147,10 +149,12 @@ function check_answer () {
 		if (user_check == true) {
 
 			console.log("hey");
+			$(".guess").html("");
 			right_answer();
 
 		} else {
 			console.log("bye");
+			$(".guess").html("");
 			wrong_answer();
 		}
 
@@ -164,7 +168,7 @@ function game_over_man_game_over(){
 	//$(".guess").html("Round One Done");
 
 	stopwatch.stop();
-	$(".panel-title").html("Round Done");
+	$(".info-title").html("Round Done");
 
 	$(".info_panel").html("<h2> Right Anwsers: " +  wins +"</h2>" + "<h2>  Wrong Anwser is: " +  wrongs +"</h2>");
 
@@ -209,6 +213,7 @@ function rounds(){
 
 function rinse_and_repeat(){
 
+
 	$(".guess").html("");
 	stopwatch.reset();
 	the_pick_is = question_pick();
@@ -221,7 +226,7 @@ function rinse_and_repeat(){
 
 function times_up (){
 
-	$(".panel-title").html("Times up the answer was " + the_pick_is.answer);
+	$(".info-title").html("Times up the answer was " + the_pick_is.answer);
 	$(".info_panel").html("<img src=" + the_pick_is.img + " width='300px'>");
 	console.log(the_pick_is.answer);
 
@@ -234,7 +239,7 @@ function times_up (){
 
 function right_answer(){
 
-	$(".panel-title").html("Good Job " + the_pick_is.answer);
+	$(".info-title").html("Good Job! It was        " + the_pick_is.answer);
 	$(".info_panel").html("<img src=" + the_pick_is.img + " width='300px'>");
 	stopwatch.stop();
 	wins++;
@@ -245,7 +250,7 @@ function right_answer(){
 
 function wrong_answer() {
 	
-	$(".panel-title").html("Wrong! " + the_pick_is.answer);
+	$(".info-title").html("Wrong! The answer was       " + the_pick_is.answer);
 	$(".info_panel").html("<img src=" + the_pick_is.img + " width='300px'>");
 	stopwatch.stop();
 	wrongs++;

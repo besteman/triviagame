@@ -54,8 +54,8 @@
             url: queryURL,
             method: 'GET'
         }).done(function(response) {
-
-            // Example Movie
+            console.log(response);
+            console.log(response.Runtime);
             var firstRowTds = $('table').children().eq(1).children('tr').eq(0).children('td');
 
             firstRowTds.eq(0).text(response.Title);

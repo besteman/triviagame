@@ -36,7 +36,7 @@ var question4 = {
 	answer: "Lost in the Lost Forest",
 	possible: ["Looting in the Grave Yard","Wearing the Skull Mask for long period","Lost in the Lost Forest","Cursed by the Deku Tree"],
 	boolean: [false,false,true,false],
-	img: "assets/images/navi.png"
+	img: "assets/images/skull.png"
 
 };
 
@@ -46,7 +46,7 @@ var question5 = {
 	answer:  "Princess Ruto",
 	possible: ["Princess Ruto","Prince Ruto","Great Fairy","Zora captives"],
 	boolean: [true,false,false,false],
-	img: "assets/images/ed.jpg"
+	img: "assets/images/ruto.gif"
 
 };
 
@@ -56,7 +56,7 @@ var question6 = {
 	answer: "Lense of Truth",
 	possible: ["Song of Truth","Sledgehammer","Lense of Truth","Fire Arrow"],
 	boolean: [false,false,true,false],
-	img: "assets/images/bongo.png"
+	img: "assets/images/truth.jpg"
 
 };
 

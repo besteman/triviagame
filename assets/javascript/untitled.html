@@ -52,7 +52,8 @@
             method: 'GET'
         })
         .done(function(response) {
-
+            console.log(response);
+            console.log(response.Title);
             // Example Movie
             var firstRowTds = $('table').children().eq(1).children('tr').eq(0).children('td');
 
