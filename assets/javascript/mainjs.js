@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 
-
+fkfhg
 /**
  * Object to hold time of the countdown
  * It will append to the page the time
@@ -264,7 +264,7 @@ function rinse_and_repeat(){
  */
 function times_up (){
 
-	$(".info-title").html("Times up the answer was " + the_pick_is.answer);
+	$(".info-title").html("Times up the answer was " + the_pick_is.answer);s
 
 	$(".info_panel").html("<img src=" + the_pick_is.img + " width='300px'>");
 
