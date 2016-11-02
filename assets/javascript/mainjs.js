@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 
-fkfhg
+
 /**
  * Object to hold time of the countdown
  * It will append to the page the time
