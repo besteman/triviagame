@@ -275,10 +275,6 @@ function times_up (){
 }
 
 
-/**
- * Handles logic for if the user selects the right answer
- * @return {None} Calls rinse and repeat 
- */
 function right_answer(){
 
 	$(".info-title").html("Good Job! It was        " + the_pick_is.answer);
